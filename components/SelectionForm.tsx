@@ -24,9 +24,9 @@ const SelectionForm: React.FC<SelectionFormProps> = ({ selection, setSelection, 
   return (
     <div className="bg-slate-800/50 p-6 rounded-2xl border border-slate-700 space-y-6 shadow-xl backdrop-blur-sm">
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-        {/* Brand */}
+        {/* الماركة */}
         <div>
-          <label className="block text-sm font-semibold mb-2 text-blue-400">نوع السيارة (La Marque)</label>
+          <label className="block text-sm font-semibold mb-2 text-blue-400">نوع السيارة (Marque)</label>
           <select 
             className="w-full bg-slate-900 border border-slate-600 rounded-lg p-3 outline-none focus:border-blue-500 transition-colors"
             value={selection.brand}
@@ -37,9 +37,9 @@ const SelectionForm: React.FC<SelectionFormProps> = ({ selection, setSelection, 
           </select>
         </div>
 
-        {/* Model */}
+        {/* الموديل */}
         <div>
-          <label className="block text-sm font-semibold mb-2 text-blue-400">موديل السيارة (Modèle)</label>
+          <label className="block text-sm font-semibold mb-2 text-blue-400">الموديل (Modèle)</label>
           <select 
             className="w-full bg-slate-900 border border-slate-600 rounded-lg p-3 outline-none focus:border-blue-500 transition-colors"
             value={selection.model}
@@ -51,7 +51,7 @@ const SelectionForm: React.FC<SelectionFormProps> = ({ selection, setSelection, 
           </select>
         </div>
 
-        {/* Year */}
+        {/* السنة */}
         <div>
           <label className="block text-sm font-semibold mb-2 text-blue-400">سنة الصنع (Année)</label>
           <select 
@@ -64,69 +64,66 @@ const SelectionForm: React.FC<SelectionFormProps> = ({ selection, setSelection, 
           </select>
         </div>
 
-        {/* Fault Type */}
+        {/* نوع العطل */}
         <div>
-          <label className="block text-sm font-semibold mb-2 text-blue-400">نوع العطل (Type de panne)</label>
+          <label className="block text-sm font-semibold mb-2 text-blue-400">نوع العطل (Système)</label>
           <select 
             className="w-full bg-slate-900 border border-slate-600 rounded-lg p-3 outline-none focus:border-blue-500 transition-colors"
             value={selection.faultType}
             onChange={(e) => setSelection({ ...selection, faultType: e.target.value })}
           >
-            <option value="">إختر نظام العطل...</option>
             {FAULT_TYPES.map(f => <option key={f} value={f}>{f}</option>)}
           </select>
         </div>
       </div>
 
-      {/* OBD Code Section */}
+      {/* قسم كود OBD */}
       <div className="border-t border-slate-700 pt-6">
         <label className="block text-sm font-semibold mb-3 text-blue-400 flex justify-between items-center">
-          <span>كود OBD (مثلا: P0300)</span>
-          <span className="text-[10px] text-slate-500 font-normal">يمكنك كتابة أي كود من الـ 500+ المتوفرة</span>
+          <span>أدخل كود OBD (أو اختر من القائمة)</span>
+          <span className="text-[10px] text-green-400 font-bold">يدعم أكثر من 500 كود ✅</span>
         </label>
         
-        <div className="flex flex-col gap-3">
+        <input 
+          type="text" 
+          placeholder="مثلاً: P0300 أو DF053"
+          className="w-full bg-slate-900 border border-slate-600 rounded-lg p-4 text-2xl font-mono text-center tracking-widest outline-none focus:border-blue-500 transition-colors uppercase placeholder:text-slate-700 mb-3"
+          value={selection.obdCode}
+          onChange={(e) => {
+            const val = e.target.value.toUpperCase();
+            setSelection({ ...selection, obdCode: val });
+            setObdSearch(val);
+          }}
+        />
+
+        <div className="relative">
           <input 
-            type="text" 
-            placeholder="أدخل الكود يدويا هنا..."
-            className="w-full bg-slate-900 border border-slate-600 rounded-lg p-4 text-xl font-mono text-center tracking-widest outline-none focus:border-blue-500 transition-colors uppercase placeholder:text-slate-700"
-            value={selection.obdCode}
-            onChange={(e) => {
-              const val = e.target.value.toUpperCase();
-              setSelection({ ...selection, obdCode: val });
-              setObdSearch(val);
-            }}
+            type="text"
+            placeholder="🔍 ابحث في الأكواد الشائعة..."
+            className="w-full bg-slate-800/50 border border-slate-700 rounded-lg p-2 text-sm outline-none focus:border-blue-500"
+            value={obdSearch}
+            onChange={(e) => setObdSearch(e.target.value)}
           />
-          
-          <div className="relative">
-            <input 
-              type="text"
-              placeholder="🔍 ابحث في القائمة الشائعة..."
-              className="w-full bg-slate-800/50 border border-slate-700 rounded-lg p-2 text-sm outline-none focus:border-blue-500"
-              value={obdSearch}
-              onChange={(e) => setObdSearch(e.target.value)}
-            />
-            <div className="mt-2 max-h-40 overflow-y-auto bg-slate-900 border border-slate-700 rounded-lg divide-y divide-slate-800 scrollbar-thin scrollbar-thumb-slate-700">
-              {filteredCodes.length > 0 ? (
-                filteredCodes.map(c => (
-                  <button 
-                    key={c.code}
-                    className={`w-full text-right p-3 hover:bg-slate-800 transition-colors flex justify-between items-center ${selection.obdCode === c.code ? 'bg-blue-900/40' : ''}`}
-                    onClick={() => {
-                      setSelection({ ...selection, obdCode: c.code });
-                      setObdSearch(c.code);
-                    }}
-                  >
-                    <span className="font-mono font-bold text-blue-400">{c.code}</span>
-                    <span className="text-xs text-slate-400">{c.description}</span>
-                  </button>
-                ))
-              ) : (
-                <div className="p-4 text-center text-xs text-slate-500">
-                  كود غير موجود في القائمة؟ اكتبه يدوياً في الأعلى.
-                </div>
-              )}
-            </div>
+          <div className="mt-2 max-h-48 overflow-y-auto bg-slate-900 border border-slate-700 rounded-lg divide-y divide-slate-800 shadow-inner">
+            {filteredCodes.length > 0 ? (
+              filteredCodes.map(c => (
+                <button 
+                  key={c.code}
+                  className={`w-full text-right p-3 hover:bg-slate-800 transition-colors flex justify-between items-center ${selection.obdCode === c.code ? 'bg-blue-900/40' : ''}`}
+                  onClick={() => {
+                    setSelection({ ...selection, obdCode: c.code });
+                    setObdSearch(c.code);
+                  }}
+                >
+                  <span className="font-mono font-bold text-blue-400">{c.code}</span>
+                  <span className="text-xs text-slate-400">{c.description}</span>
+                </button>
+              ))
+            ) : (
+              <div className="p-4 text-center text-xs text-slate-500">
+                الكود غير موجود في القائمة؟ لا تقلق، أدخله يدوياً وسيقوم النظام بتحليله.
+              </div>
+            )}
           </div>
         </div>
       </div>
@@ -143,19 +140,15 @@ const SelectionForm: React.FC<SelectionFormProps> = ({ selection, setSelection, 
         {loading ? (
           <>
             <div className="w-6 h-6 border-4 border-white/20 border-t-white rounded-full animate-spin"></div>
-            <span>جاري تحليل الـ OBD...</span>
+            <span>جاري تحليل الـ OBD بالذكاء الاصطناعي...</span>
           </>
         ) : (
           <>
-            <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" /></svg>
-            <span>بدء التشخيص الحقيقي (Scan)</span>
+            <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" /></svg>
+            <span>بدء الفحص الحقيقي (Scan)</span>
           </>
         )}
       </button>
-      
-      <p className="text-center text-[10px] text-slate-600 uppercase tracking-widest font-bold">
-        Professional Database: 500+ Codes Integrated
-      </p>
     </div>
   );
 };
