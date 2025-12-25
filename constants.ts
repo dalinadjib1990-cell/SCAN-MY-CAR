@@ -1,0 +1,100 @@
+
+import { CarBrand, OBDCode } from './types';
+
+export const ALGERIAN_CAR_BRANDS: CarBrand[] = [
+  { id: 'renault', name: 'Renault (رونو)', logo: '🚗', models: ['Symbol', 'Clio 4', 'Clio 5', 'Megane 3', 'Megane 4', 'Kangoo', 'Master', 'Captur'] },
+  { id: 'dacia', name: 'Dacia (داسيا)', logo: '🚙', models: ['Logan', 'Sandero', 'Stepway', 'Duster', 'Dokker', 'Lodgy'] },
+  { id: 'peugeot', name: 'Peugeot (بيجو)', logo: '🦁', models: ['208', '308', '301', 'Partner', 'Expert', '2008', '3008', '508'] },
+  { id: 'volkswagen', name: 'Volkswagen (فولفُاقن)', logo: '🇩🇪', models: ['Golf 7', 'Golf 8', 'Polo', 'Caddy', 'Tiguan', 'Passat', 'Amarok'] },
+  { id: 'fiat', name: 'Fiat (فيات)', logo: '🇮🇹', models: ['Tipo', '500', 'Doblo', 'Ducato', 'Panda', 'Florino'] },
+  { id: 'kia', name: 'Kia (كيا)', logo: '🇰🇷', models: ['Picanto', 'Rio', 'Sportage', 'Sorento', 'Cerato', 'K5'] },
+  { id: 'hyundai', name: 'Hyundai (هيونداي)', logo: '🇰🇷', models: ['Accent', 'i10', 'i20', 'i30', 'Tucson', 'Santa Fe', 'Creta'] },
+  { id: 'chery', name: 'Chery (شيري)', logo: '🇨🇳', models: ['QQ', 'Tiggo 2', 'Tiggo 4', 'Arrizo 5', 'Tiggo 7', 'Tiggo 8'] },
+  { id: 'toyota', name: 'Toyota (تويوتا)', logo: '🇯🇵', models: ['Hilux', 'Corolla', 'Yaris', 'Land Cruiser', 'Prado', 'Rav4'] },
+  { id: 'seat', name: 'SEAT (سيات)', logo: '🇪🇸', models: ['Ibiza', 'Leon', 'Arona', 'Ateca', 'Tarraco'] },
+  { id: 'skoda', name: 'Skoda (سكودا)', logo: '🇨🇿', models: ['Fabia', 'Octavia', 'Superb', 'Rapid', 'Kodiaq'] },
+  { id: 'citroen', name: 'Citroën (سيتروان)', logo: '🇫🇷', models: ['C3', 'C4', 'Berlingo', 'Jumpy', 'C-Elysee'] },
+  { id: 'suzuki', name: 'Suzuki (سوزوكي)', logo: '🇯🇵', models: ['Swift', 'Alto', 'Dzire', 'Jimny', 'Vitara'] },
+  { id: 'chevrolet', name: 'Chevrolet (شيفروليه)', logo: '🇺🇸', models: ['Sail', 'Aveo', 'Optra', 'Spark', 'Cruze'] },
+];
+
+export const YEARS = Array.from({ length: 35 }, (_, i) => (2025 - i).toString());
+
+export const FAULT_TYPES = [
+  'محرك (Moteur)',
+  'علبة السرعة (Boite de vitesse)',
+  'الفرامل (Freins)',
+  'الكهرباء (Electricité)',
+  'التبريد (Refroidissement)',
+  'نظام العادم (Echappement)',
+  'نظام التوجيه (Direction)',
+  'الوسائد الهوائية (Airbags)',
+];
+
+/**
+ * Expanded common OBD codes list for the Algerian market.
+ * Focuses on high-frequency issues found in local workshops.
+ */
+export const COMMON_OBD_CODES: OBDCode[] = [
+  // Engine & Fuel (P0xxx)
+  { code: 'P0101', description: 'Mass Air Flow Sensor (حساس الهواء)', category: 'Engine' },
+  { code: 'P0113', description: 'Intake Air Temperature (حساس حرارة الهواء)', category: 'Engine' },
+  { code: 'P0117', description: 'Engine Coolant Temp (حساس حرارة المحرك)', category: 'Engine' },
+  { code: 'P0128', description: 'Coolant Thermostat (تيرموستا)', category: 'Engine' },
+  { code: 'P0130', description: 'Oxygen Sensor Bank 1 (حساس الشكمان/لصوند)', category: 'Engine' },
+  { code: 'P0171', description: 'System Too Lean (خليط فقير - هواء زائد)', category: 'Engine' },
+  { code: 'P0172', description: 'System Too Rich (خليط غني - بنزين زائد)', category: 'Engine' },
+  { code: 'P0191', description: 'Fuel Rail Pressure Sensor (حساس ضغط الوقود)', category: 'Engine' },
+  { code: 'P0201', description: 'Injector Circuit Cylinder 1 (لانجيكتور 1)', category: 'Engine' },
+  { code: 'P0202', description: 'Injector Circuit Cylinder 2 (لانجيكتور 2)', category: 'Engine' },
+  { code: 'P0203', description: 'Injector Circuit Cylinder 3 (لانجيكتور 3)', category: 'Engine' },
+  { code: 'P0204', description: 'Injector Circuit Cylinder 4 (لانجيكتور 4)', category: 'Engine' },
+  { code: 'P0234', description: 'Turbo Overboost (ضغط تيربو زائد)', category: 'Engine' },
+  { code: 'P0299', description: 'Turbo Underboost (نقص ضغط التيربو)', category: 'Engine' },
+  { code: 'P0300', description: 'Random Misfire (رعشة المحرك - لي بوجي)', category: 'Engine' },
+  { code: 'P0301', description: 'Misfire Cylinder 1 (رعشة السيلندر 1)', category: 'Engine' },
+  { code: 'P0302', description: 'Misfire Cylinder 2 (رعشة السيلندر 2)', category: 'Engine' },
+  { code: 'P0303', description: 'Misfire Cylinder 3 (رعشة السيلندر 3)', category: 'Engine' },
+  { code: 'P0304', description: 'Misfire Cylinder 4 (رعشة السيلندر 4)', category: 'Engine' },
+  { code: 'P0325', description: 'Knock Sensor (حساس الطرق)', category: 'Engine' },
+  { code: 'P0335', description: 'Crankshaft Position Sensor (حساس ليروكا)', category: 'Engine' },
+  { code: 'P0340', description: 'Camshaft Position Sensor (حساس لابرأكام)', category: 'Engine' },
+  { code: 'P0401', description: 'EGR Flow Insufficient (فان اي جي ار)', category: 'Engine' },
+  { code: 'P0420', description: 'Catalytic Converter Efficiency (الكاطاليزور)', category: 'Exhaust' },
+  { code: 'P0443', description: 'Purge Control Valve (حساس كانيستر)', category: 'Engine' },
+  { code: 'P0500', description: 'Vehicle Speed Sensor (حساس السرعة)', category: 'Electrical' },
+  { code: 'P0505', description: 'Idle Control System (الموتور با با)', category: 'Engine' },
+  { code: 'P0562', description: 'System Voltage Low (نقص الفولت - باتري)', category: 'Electrical' },
+  { code: 'P0606', description: 'PCM Processor Fault (ميموار السيارة)', category: 'Electrical' },
+  { code: 'P0700', description: 'Transmission System (علبة السرعة)', category: 'Transmission' },
+  { code: 'P0705', description: 'Transmission Range Sensor (حساس التعشيق)', category: 'Transmission' },
+  { code: 'P0720', description: 'Output Speed Sensor (حساس سرعة المخرج)', category: 'Transmission' },
+  { code: 'P0730', description: 'Incorrect Gear Ratio (خلل في نسب التروس)', category: 'Transmission' },
+  { code: 'P0841', description: 'Transmission Fluid Pressure (ضغط زيت لابوات)', category: 'Transmission' },
+  { code: 'P2101', description: 'Throttle Actuator Control (البابيون)', category: 'Engine' },
+  { code: 'P2135', description: 'Throttle Position Sensor (حساس البيدال)', category: 'Engine' },
+  { code: 'P2264', description: 'Water in Fuel Sensor (ماء في المازوت)', category: 'Engine' },
+  { code: 'P2509', description: 'ECM/PCM Power Input (تغذية الميموار)', category: 'Electrical' },
+  { code: 'P2563', description: 'Turbo Vane Position Sensor (حساس ريش التيربو)', category: 'Engine' },
+  { code: 'U0100', description: 'Lost Comm with ECM (فقدان الاتصال بالميموار)', category: 'Electrical' },
+  { code: 'U0101', description: 'Lost Comm with TCM (فقدان الاتصال بلابوات)', category: 'Transmission' },
+  { code: 'U0121', description: 'Lost Comm with ABS (فقدان الاتصال بالابياص)', category: 'Brakes' },
+  { code: 'U0155', description: 'Lost Comm with Cluster (طابلو دبور)', category: 'Electrical' },
+  { code: 'B0001', description: 'Driver Airbag Fault (ليرباق تاع الشوفير)', category: 'Electrical' },
+  { code: 'B1000', description: 'ECU Internal Fault (خلل داخلي في الميموار)', category: 'Electrical' },
+  { code: 'C0035', description: 'Left Front Wheel Speed (حساس الابياص الامامي)', category: 'Brakes' },
+  { code: 'C1214', description: 'ABS Solenoid Valve (بلوك ابياص)', category: 'Brakes' },
+  // Renault/Dacia Specific (Common in DZ)
+  { code: 'DF001', description: 'Water Temperature Sensor (حساس الماء - رونو)', category: 'Engine' },
+  { code: 'DF017', description: 'Preheating Unit (شمعات التسخين - رونو)', category: 'Engine' },
+  { code: 'DF025', description: 'Preheating Unit Connection (خلل تسخين - رونو)', category: 'Engine' },
+  { code: 'DF053', description: 'Rail Pressure Regulation (ضغط السكة - رونو)', category: 'Engine' },
+  { code: 'DF056', description: 'Air Flow Sensor (حساس الهواء - رونو)', category: 'Engine' },
+  { code: 'DF119', description: 'Camshaft Sensor Signal (إشارة لابرأكام - رونو)', category: 'Engine' },
+  { code: 'DF209', description: 'EGR Valve Position (وضعية الفان اي جي ار - رونو)', category: 'Engine' },
+  { code: 'DF226', description: 'Automatic Gearbox (علبة اوتوماتيك - رونو)', category: 'Transmission' },
+  { code: 'DF569', description: 'Turbo Charging Circuit (دارة التيربو - رونو)', category: 'Engine' },
+];
+
+// Note: The UI provides a manual entry for any of the 500+ standard OBD codes.
+// The list above covers the most common seen in Algerian garages.

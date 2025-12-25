@@ -1,0 +1,7 @@
+{
+  "name": "Scan My Car - Algeria",
+  "description": "The professional car diagnostic tool for the Algerian market, providing real solutions for OBD-II faults in Standard Arabic and Algerian Darija, including mechanic terminology and cost estimation.",
+  "requestFramePermissions": [
+    "camera"
+  ]
+}
